@@ -5,19 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- 🚨 LOGIKA PENGAMBILAN SETTINGS UNTUK TITLE DAN FAVICON --}}
     @php
         use Illuminate\Support\Facades\Storage;
-        
-        // Menggunakan fallback jika settings belum dimuat
         $settings = $settings ?? \App\Models\Setting::pluck('value', 'key')->toArray(); 
         $schoolName = $settings['school_name'] ?? config('app.name', 'E-Absensi');
         $schoolLogoPath = $settings['school_logo'] ?? 'default/favicon.ico'; 
-        
-        // --- LOGIKA PATH FAVICON/LOGO ---
         $faviconUrl = asset('images/default/favicon.ico'); 
-        
-        // 🔥 PERBAIKAN: Gunakan path default yang lebih aman jika path DB kosong
         if (!empty($schoolLogoPath) && $schoolLogoPath != 'default/favicon.ico' && Storage::disk('public')->exists($schoolLogoPath)) {
             $faviconUrl = asset('storage/' . $schoolLogoPath);
         }
@@ -25,27 +18,46 @@
     
     <title>@yield('title') - {{ $schoolName }}</title>
 
-    {{-- FAVICON DINAMIS --}}
     <link rel="icon" href="{{ $faviconUrl }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ $faviconUrl }}" type="image/x-icon">
 
-    {{-- Font Tailwind: Inter --}}
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    {{-- Fonts --}}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     
-    {{-- Font Awesome (Tetap dipakai untuk ikon) --}}
+    {{-- Font Awesome --}}
     <link rel="stylesheet" href="{{ asset('template/adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     
-    {{-- 🔥 TAILWIND CSS (MENGGANTIKAN SEMUA CSS ADMINLTE) --}}
+    {{-- Tailwind CSS --}}
     @vite(['resources/css/app.css', 'resources/js/app.js']) 
-
-    {{-- AOS ANIMATION --}}
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     {{-- Custom CSS --}}
     @stack('css')
 
+    <style>
+        /* Auth page specific: prevent transition flash */
+        html { background-color: #030712; }
+        
+        /* Custom input autofill style for dark backgrounds */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: #f1f5f9;
+            -webkit-box-shadow: 0 0 0px 1000px rgba(255,255,255,0.05) inset;
+            transition: background-color 5000s ease-in-out 0s;
+            caret-color: #f1f5f9;
+        }
+
+        /* Smooth orb animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float 8s ease-in-out infinite 2s; }
+    </style>
+
 </head>
-<body class="bg-gray-50 font-sans text-gray-900 antialiased">
+<body class="font-inter antialiased bg-gray-950 text-white">
     
     {{-- GLOBAL LOADER --}}
     @include('layouts.partials.loader')
@@ -56,15 +68,6 @@
     {{-- REQUIRED SCRIPTS --}}
     <script src="{{ asset('template/adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('template/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    
-    {{-- AOS ANIMATION JS --}}
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-        });
-    </script>
     
     {{-- Custom JavaScript --}}
     @yield('js')

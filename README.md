@@ -1,112 +1,148 @@
-# 🏫 E-Absensi Siswa
+# 📋 E-Absensi Siswa
 
-**E-Absensi Siswa** adalah aplikasi berbasis web modern untuk manajemen presensi siswa sekolah yang efisien, transparan, dan real-time. Aplikasi ini memanfaatkan QR Code untuk mempercepat proses absensi, serta fitur notifikasi WhatsApp otomatis kepada orang tua, dan rekap laporan kehadiran yang komprehensif.
+Sistem manajemen absensi siswa digital berbasis QR Code dengan notifikasi real-time. Dibangun dengan **Laravel 11**, **Tailwind CSS**, dan **Alpine.js**.
 
-## 🚀 Fitur Unggulan
+![Laravel](https://img.shields.io/badge/Laravel-11-FF2D20?style=flat&logo=laravel&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=flat&logo=tailwind-css&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-8-4479A1?style=flat&logo=mysql&logoColor=white)
 
--   **📱 Scan QR Code Cepat**: Absensi siswa dilakukan hanya dalam hitungan detik dengan memindai Kartu Pelajar ber-QR Code menggunakan kamera laptop/PC sekolah.
--   **💬 Notifikasi WhatsApp Gateway**: Orang tua otomatis menerima pesan WhatsApp saat anak melakukan absensi Masuk dan Pulang (Real-time).
--   **📄 Laporan PDF Otomatis**: Guru/Admin dapat mengunduh rekap absensi harian, bulanan, hingga semester dalam format PDF siap cetak.
--   **👥 Manajemen Pengguna & Hak Akses**:
-    -   **Admin**: Akses penuh ke seluruh sistem, manajemen data master (Siswa, Guru, Kelas, Jurusan), dan setting sekolah.
-    -   **Wali Kelas**: Memantau kehadiran siswa di kelasnya, mencetak laporan, dan mengelola izin/sakit.
-    -   **Operator/Guru Piket**: Khusus untuk melakukan scanning absensi harian.
--   **📊 Dashboard Informatif**: Statistik kehadiran harian ditampilkan dalam grafik dan angka yang mudah dipahami.
--   **🎨 UI/UX Modern & Responsif**: Dibangun dengan Tailwind CSS dan Alpine.js untuk pengalaman pengguna yang mulus di perangkat desktop maupun mobile. Ada fitur **Dark Mode** (opsional/future) dan animasi interaktif.
--   **🔧 Pengaturan Sekolah Dinamis**: Logo sekolah, nama sekolah, kepala sekolah, dan tahun ajaran dapat diatur langsung dari menu Settings tanpa menyentuh kodingan.
+---
 
-## 🛠️ Teknologi yang Digunakan
+## ✨ Fitur Utama
 
-Aplikasi ini dibangun menggunakan stack teknologi modern untuk performa dan kemudahan pengembangan:
+- 🔐 **Multi-Role Auth** — Super Admin, Wali Kelas, Orang Tua
+- 📱 **Scan QR Code** — Absensi masuk & pulang via kamera
+- 💬 **Notifikasi WhatsApp** — Otomatis ke orang tua saat siswa absen
+- 📊 **Laporan & Rekap** — Harian, bulanan, semester (export PDF)
+- 📝 **Pengajuan Izin Online** — Orang tua ajukan izin/sakit digital
+- 🗓️ **Jadwal Pelajaran** — Kelola jadwal per kelas & guru
+- 🌙 **Dark Mode** — Toggle light/dark dengan preferensi tersimpan
+- 📣 **Pengumuman** — Kelola pengumuman sekolah
 
--   **Backend**: [Laravel 12](https://laravel.com) (PHP Entity Framework)
--   **Frontend**:
-    -   [Tailwind CSS](https://tailwindcss.com) (Styling)
-    -   [Alpine.js](https://alpinejs.dev) (Interaktivitas Ringan)
-    -   [Blade Templates](https://laravel.com/docs/blade)
--   **Database**: MySQL
--   **Authentication**: Laravel Breeze
--   **Library Pendukung**:
-    -   `barryvdh/laravel-dompdf`: Untuk generate laporan PDF.
-    -   `simplesoftwareio/simple-qrcode`: Untuk generate QR Code siswa.
-    -   `aos`: Animate On Scroll untuk efek visual landing page.
-    -   `chart.js` / `apexcharts`: Untuk grafik statistik di dashboard.
+---
 
-## ⚙️ Persyaratan Sistem
+## 🚀 Instalasi Lokal
 
-Pastikan server Anda memenuhi persyaratan berikut:
+### Prasyarat
+- PHP >= 8.2
+- Composer
+- MySQL 8+
+- Node.js >= 18 & npm
 
--   PHP >= 8.3
--   Composer
--   MySQL / MariaDB
--   Node.js & NPM (untuk compile asset)
+### Langkah-langkah
 
-## 📥 Cara Instalasi
+```bash
+# 1. Clone repository
+git clone https://github.com/USERNAME/e-absensi-siswa.git
+cd e-absensi-siswa
 
-Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lokal (Localhost):
+# 2. Install dependencies PHP
+composer install
 
-1.  **Clone Repository**
-    ```bash
-    git clone https://github.com/username/e-absensi-siswa.git
-    cd e-absensi-siswa
-    ```
+# 3. Install dependencies Node.js
+npm install
 
-2.  **Install Dependencies**
-    ```bash
-    composer install
-    npm install
-    ```
+# 4. Salin file environment
+cp .env.example .env
 
-3.  **Konfigurasi Environment**
-    Salin file `.env.example` menjadi `.env` dan atur koneksi database Anda.
-    ```bash
-    cp .env.example .env
-    ```
-    Buka file `.env` dan sesuaikan DB_DATABASE, DB_USERNAME, dan DB_PASSWORD.
+# 5. Generate application key
+php artisan key:generate
 
-4.  **Generate App Key**
-    ```bash
-    php artisan key:generate
-    ```
+# 6. Konfigurasi database di .env
+# DB_DATABASE=e_absensi_siswa
+# DB_USERNAME=root
+# DB_PASSWORD=
 
-5.  **Migrasi & Seeding Database**
-    Jalankan perintah ini untuk membuat tabel dan mengisi data awal (Akun Admin Default).
-    ```bash
-    php artisan migrate --seed
-    ```
+# 7. Jalankan migrasi & seeder
+php artisan migrate --seed
 
-6.  **Jalankan Server**
-    Buka dua terminal terpisah untuk menjalankan server Laravel dan Vite (Asset Bundling).
-    
-    *Terminal 1:*
-    ```bash
-    php artisan serve
-    ```
-    
-    *Terminal 2:*
-    ```bash
-    npm run dev
-    ```
+# 8. Buat symbolic link storage
+php artisan storage:link
 
-7.  **Akses Aplikasi**
-    Buka browser dan kunjungi `http://localhost:8000`.
+# 9. Build assets
+npm run build
 
-## 🔐 Akun Default (Seeder)
+# 10. Jalankan server
+php artisan serve
+```
 
-Jika menggunakan `db:seed`, Anda bisa login dengan akun berikut:
+Buka browser: `http://127.0.0.1:8000`
 
--   **Admin**
-    -   Email: `admin@admin.com`
-    -   Password: `password`
+---
 
-## 📸 Tangkapan Layar (Screenshots)
+## 👤 Akun Default (Seeder)
 
-*(Tambahkan screenshot aplikasi di sini nanti)*
+| Role | Email | Password |
+|------|-------|----------|
+| Super Admin | admin@example.com | password |
 
-## 🤝 Kontribusi
+---
 
-Kontribusi selalu terbuka! Jika Anda ingin memperbaiki bug atau menambahkan fitur, silakan buat Pull Request.
+## 🛠️ Tech Stack
+
+| Layer | Teknologi |
+|-------|-----------|
+| Backend | Laravel 11, PHP 8.2 |
+| Frontend | Blade, Tailwind CSS v3, Alpine.js |
+| Database | MySQL 8 |
+| Build Tool | Vite |
+| Icons | Font Awesome 6 |
+| Charts | Chart.js |
+| Alerts | SweetAlert2 |
+
+---
+
+## 📁 Struktur Direktori Penting
+
+```
+├── app/
+│   ├── Http/Controllers/     # Controllers per role
+│   └── Models/               # Eloquent models
+├── database/
+│   ├── migrations/           # Schema database
+│   └── seeders/              # Data awal
+├── resources/
+│   ├── css/app.css           # Tailwind + custom CSS
+│   ├── js/app.js             # Alpine.js bootstrap
+│   └── views/
+│       ├── admin/            # Views Super Admin
+│       ├── walikelas/        # Views Wali Kelas
+│       ├── orangtua/         # Views Orang Tua
+│       ├── auth/             # Login, Register
+│       ├── layouts/          # Layout utama & partials
+│       └── landing.blade.php # Landing page
+└── routes/web.php            # Definisi routes
+```
+
+---
+
+## ⚙️ Konfigurasi Environment
+
+Salin `.env.example` ke `.env` dan sesuaikan:
+
+```env
+APP_NAME="E-Absensi Siswa"
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=e_absensi_siswa
+DB_USERNAME=root
+DB_PASSWORD=
+
+# WhatsApp Gateway (Fonnte/Wablas)
+WHATSAPP_TOKEN=your_token_here
+WHATSAPP_SENDER=your_number_here
+```
+
+---
 
 ## 📄 Lisensi
 
-Aplikasi ini bersifat open-source di bawah lisensi [MIT](https://opensource.org/licenses/MIT).
+MIT License — bebas digunakan untuk keperluan pendidikan.
+
+---
+
+> Dibuat dengan ❤️ untuk kemajuan pendidikan Indonesia.

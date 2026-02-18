@@ -1,3 +1,128 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --color-bg-primary: #f3f4f6;
+        --color-bg-surface: #ffffff;
+        --color-bg-surface-2: #f9fafb;
+        --color-border: #e5e7eb;
+        --color-text-primary: #111827;
+        --color-text-secondary: #6b7280;
+        --color-text-muted: #9ca3af;
+        --color-accent: #4f46e5;
+        --color-accent-light: #eef2ff;
+    }
+
+    .dark {
+        --color-bg-primary: #0f1117;
+        --color-bg-surface: #1a1d27;
+        --color-bg-surface-2: #13151f;
+        --color-border: #2d3148;
+        --color-text-primary: #f1f5f9;
+        --color-text-secondary: #94a3b8;
+        --color-text-muted: #64748b;
+        --color-accent: #818cf8;
+        --color-accent-light: #1e1b4b;
+    }
+
+    html {
+        @apply transition-colors duration-300;
+    }
+
+    body {
+        background-color: var(--color-bg-primary);
+        color: var(--color-text-primary);
+        @apply antialiased;
+    }
+}
+
+@layer components {
+
+    /* Dark mode scrollbar */
+    .dark .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-track {
+        @apply bg-gray-800;
+    }
+
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+        @apply bg-gray-600 rounded-full;
+    }
+
+    /* Dark mode for Select2 */
+    .dark .select2-container--default .select2-selection--single {
+        @apply bg-gray-800 border-gray-600 text-gray-100;
+    }
+
+    .dark .select2-container--default .select2-selection--single .select2-selection__rendered {
+        @apply text-gray-100;
+    }
+
+    .dark .select2-dropdown {
+        @apply bg-gray-800 border-gray-600;
+    }
+
+    .dark .select2-container--default .select2-results__option {
+        @apply text-gray-200;
+    }
+
+    .dark .select2-container--default .select2-results__option--highlighted {
+        @apply bg-indigo-600 text-white;
+    }
+
+    .dark .select2-search--dropdown .select2-search__field {
+        @apply bg-gray-700 border-gray-600 text-gray-100;
+    }
+
+    /* Dark mode for Bootstrap table */
+    .dark .table {
+        color: var(--color-text-primary);
+    }
+
+    .dark .table-striped>tbody>tr:nth-of-type(odd)>* {
+        background-color: rgba(255, 255, 255, 0.03);
+        color: var(--color-text-primary);
+    }
+
+    .dark .table> :not(caption)>*>* {
+        border-color: var(--color-border);
+    }
+
+    /* Dark mode card utility */
+    .card-dark {
+        @apply bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700;
+    }
+
+    /* Smooth theme transition for all elements */
+    *,
+    *::before,
+    *::after {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+    }
+
+    /* Override for animations that shouldn't have color transition */
+    .animate-spin,
+    .animate-pulse,
+    .animate-bounce {
+        transition: none !important;
+    }
+
+    /* Dark mode SweetAlert2 */
+    .dark .swal2-popup {
+        @apply bg-gray-800 text-gray-100;
+    }
+
+    .dark .swal2-title {
+        @apply text-gray-100;
+    }
+
+    .dark .swal2-html-container {
+        @apply text-gray-300;
+    }
+}
