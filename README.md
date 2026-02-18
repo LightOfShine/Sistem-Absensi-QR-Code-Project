@@ -9,6 +9,37 @@ Sistem manajemen absensi siswa digital berbasis QR Code dengan notifikasi real-t
 
 ---
 
+## 📸 Tampilan Aplikasi
+
+<table>
+  <tr>
+    <td align="center"><strong>🏠 Landing Page</strong></td>
+    <td align="center"><strong>🔐 Halaman Login</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/landing.png" alt="Landing Page" width="100%"></td>
+    <td><img src="docs/screenshots/login.png" alt="Login" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>📝 Halaman Register</strong></td>
+    <td align="center"><strong>📊 Dashboard Admin</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/register.png" alt="Register" width="100%"></td>
+    <td><img src="docs/screenshots/dashboard.png" alt="Dashboard" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>📷 Scan QR Code</strong></td>
+    <td align="center"><strong>📋 Laporan Absensi</strong></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/scan-qr.png" alt="Scan QR" width="100%"></td>
+    <td><img src="docs/screenshots/laporan.png" alt="Laporan" width="100%"></td>
+  </tr>
+</table>
+
+---
+
 ## ✨ Fitur Utama
 
 - 🔐 **Multi-Role Auth** — Super Admin, Wali Kelas, Orang Tua
