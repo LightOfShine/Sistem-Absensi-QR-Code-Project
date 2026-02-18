@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         // 1. AKUN SUPER ADMIN (Otomatis Disetujui & Diverifikasi)
         User::create([
             'name' => 'Super Admin Sekolah',
-            'email' => 'ardiansyahdzan@gmail.com',
+            'email' => 'ryangabriel@gmail.com',
             'password' => Hash::make('password'), 
             'role' => 'super_admin',
             // ✅ Status Wajib
