@@ -64,7 +64,7 @@ class CustomRegisteredUserController extends Controller
         // ✅ REDIRECT FINAL: Langsung ke login dengan pesan sukses
         return redirect()->route('login')->with(
             'success', 
-            'Akun Berhasil Dibuat! Tunggu Administrator menyetujui akun Anda untuk bisa Masuk.'
+            'Akun Berhasil Dibuat! Tunggu Administrator menyetujui akun Anda untuk bisa Masuk ya.'
         );
     }
 }
